@@ -24,7 +24,8 @@ Route::get('/verexpediente', function () {
 
 Route::resource('expedientes','App\Http\Controllers\ExpedienteController');
 
-Route::get('/expedientes', [ExpedienteController::class, "show"]);
+Route::get('/verexpedientes', [ExpedienteController::class, "show"]);
+Route::post('/expedientes', [ExpedienteController::class, "store"]);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

@@ -19,6 +19,7 @@ class CreateExpedientesTable extends Migration
             $table->string('asunto',45);
             $table->integer('cantidad');
             $table->decimal('precio',8 ,2);
+            $table->string('archivo');
             $table->timestamps();
         });
     }

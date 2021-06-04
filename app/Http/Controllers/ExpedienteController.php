@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Expediente;
 
+use Illuminate\Support\Facades\Storage;
+
 class ExpedienteController extends Controller
 {
     /**
@@ -36,11 +38,25 @@ class ExpedienteController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'archivo' =>'mimes:jpeg,bmp,png,jpg,pdf',
+            ]
+        );
+        $file = $request["archivo"];
+            $nombre =  time();
+
+            \Storage::disk('public')->put($nombre,  \File::get($file));
         $expedientes = new Expediente();
         $expedientes->codigo = $request->get('codigo');
         $expedientes->asunto = $request->get('asunto');
         $expedientes->cantidad = $request->get('cantidad');
         $expedientes->precio = $request->get('precio');
+        if($request->hasFile('archivo'))
+        {
+        $expedientes->archivo = $request->file('archivo')->store('uploads','public');
+        }
+        $expedientes->archivo = $nombre;
 
         $expedientes->save();
 
@@ -86,8 +102,17 @@ class ExpedienteController extends Controller
         $expedientes->cantidad = $request->get('cantidad');
         $expedientes->precio = $request->get('precio');
 
-        $expedientes->save();
+        if($request->hasFile('archivo'))
+        {
+            $foto = Expediente::findOrFail($id);
+            Storage::delete('public/'.$expedientes->archivo);
 
+            $expedientes->archivo = $request->file('archivo')->store('uploads','public');
+        }
+        
+        
+
+        $expedientes->save();       
         return redirect('/expedientes');
     }
 

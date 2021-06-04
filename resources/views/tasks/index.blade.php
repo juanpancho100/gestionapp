@@ -22,12 +22,7 @@
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Acciones
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Estado
-              </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Rol
-              </th>              
+                           
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
@@ -37,9 +32,9 @@
                     {{$task->description}}
                 </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <a href="{{route('tasks.show', $task->id)}}" class="text-blue-600"></a>
-                <a href="{{route('tasks.edit', $task->id)}}" class="text-indigo-600"></a>
-                <form action="inline-block" action=" {{route('tasks.destroy',$task->id)}}">
+                <a href="{{route('tasks.show', $task->id)}}" class="text-blue-600 hover-blue-900 mb-2">ver</a>
+                <a href="{{route('tasks.edit', $task->id)}}" class="text-indigo-600 hover-indigo-900 mb-2">editar</a>
+                <form action="inline-block" action="{{route('tasks.destroy', $task->id)}}">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <input type="submit" class="text-red-600 hover:text-red-900 mb-2">

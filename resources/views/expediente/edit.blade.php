@@ -1,4 +1,4 @@
-@extends('layouts.plantillabase');
+@extends('layouts.plantillabase')
 
 @section('contenido')
 <h2>Editar registros</h2>
@@ -21,6 +21,13 @@
     <div class="mb-3">
         <label for="" class="form-label">Precio</label>
         <input id="precio" name="precio" type="number" step="any" class="form-control" value="{{$expediente->precio}}">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Archivo</label>
+        {{$expediente->archivo}}
+        <input id="archivo" name="archivo" type="file" step="any"  class="form-control" value="">
+        <span class="error_span">{{$errors->first('archivo')}}</span>
+        
     </div>
     <a href="/expedientes" class="btn btn-secondary">Cancelar</a>
     <button type="submit" class="btn btn-primary">Guardar</button>

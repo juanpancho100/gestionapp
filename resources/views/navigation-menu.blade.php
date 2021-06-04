@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/88/Bugcat_Capoo.jpg/220px-Bugcat_Capoo.jpg" alt="Lamp" width="48" height="48">
+                    <img src="https://www.sjdespi.net/wca/sites/default/files/styles/event-full/public/tramite.png?itok=kdzZGFPm" alt="Lamp" width="48" height="48">
                         
                     </a>
                 </div>
@@ -20,7 +20,7 @@
                         {{ __('Expedientes') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Tasks') }}
+                        {{ __('Tareas') }}
                     </x-jet-nav-link>
                 </div>
                 
@@ -153,7 +153,7 @@
                 {{ __('Expedientes') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Usuarios') }}
+                {{ __('Tareas') }}
             </x-jet-responsive-nav-link>
         </div>
         
