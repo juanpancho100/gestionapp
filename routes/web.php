@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ExpedienteController;
+use App\Models\Expediente;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,13 @@ Route::get('/verexpediente', function () {
     return view('verexpedientes');
 });
 
+
+Route::resource('expedientes','App\Http\Controllers\ExpedienteController');
+
+Route::get('/expedientes', [ExpedienteController::class, "show"]);
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::resource('tasks',\App\Http\Controllers\TaskController::class);
