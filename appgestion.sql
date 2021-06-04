@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 02-06-2021 a las 22:25:41
+-- Tiempo de generación: 04-06-2021 a las 04:42:27
 -- Versión del servidor: 5.7.33
 -- Versión de PHP: 7.4.19
 
@@ -29,6 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `clientes` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `expedientes`
+--
+
+CREATE TABLE `expedientes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `codigo` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `asunto` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio` decimal(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -66,14 +82,17 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
-(4, '2019_08_19_000000_create_failed_jobs_table', 1),
-(5, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(6, '2021_06_02_052447_create_sessions_table', 1),
-(7, '2021_06_02_085200_create_clientes_table', 2),
-(8, '2021_06_02_085415_create_personas_table', 3);
+(40, '2014_10_12_000000_create_users_table', 1),
+(41, '2014_10_12_100000_create_password_resets_table', 1),
+(42, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
+(43, '2019_08_19_000000_create_failed_jobs_table', 1),
+(44, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(45, '2021_06_02_052447_create_sessions_table', 1),
+(46, '2021_06_02_085200_create_clientes_table', 1),
+(47, '2021_06_02_085415_create_personas_table', 1),
+(48, '2021_06_03_072223_create_expedientes_table', 1),
+(49, '2021_06_04_033005_create_roles_table', 1),
+(50, '2021_06_04_041031_create_tasks_table', 1);
 
 -- --------------------------------------------------------
 
@@ -118,13 +137,17 @@ CREATE TABLE `personas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `personas`
+-- Estructura de tabla para la tabla `roles`
 --
 
-INSERT INTO `personas` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
-(1, 'Chuancito', NULL, NULL),
-(2, 'Marko', NULL, NULL);
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -146,8 +169,21 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('hBGyPO7929e992rcxztDcP0qSHiE9M59yfcOQb1Z', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.37', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRjRORWdLbTFtSW5JRVlHWDB3SmM0dGtnSVhia08zdTdHQXJnaFJQSiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC92ZXJleHBlZGllbnRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJDFNNXg3aS9VUm9acUNPcmdMcXVRa2VIT05JakozSE5xSEZ4Q2hKaEdRSnN0S2Q4V2dxYWZLIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCQxTTV4N2kvVVJvWnFDT3JnTHF1UWtlSE9OSWpKM0hOcUhGeENoSmhHUUpzdEtkOFdncWFmSyI7fQ==', 1622672566),
-('wkUxETs5hqTub7wowz3yvc1h5vui45ZZh2Z1wMSt', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.37', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiSmtEVTA4dGE4dTVaQldjbWlBYnlIUmd1TWJtZmtxNGIwYjVLcWowViI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly9nZXN0aW9uYXBwLnRlc3QvZGFzaGJvYXJkIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJDFNNXg3aS9VUm9acUNPcmdMcXVRa2VIT05JakozSE5xSEZ4Q2hKaEdRSnN0S2Q4V2dxYWZLIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCQxTTV4N2kvVVJvWnFDT3JnTHF1UWtlSE9OSWpKM0hOcUhGeENoSmhHUUpzdEtkOFdncWFmSyI7fQ==', 1622672570);
+('3csJIe9ISmCGjayorJ0bttn8Gi2vMsmrAysC1Cnb', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.37', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoid1FmOUp1SEkwTkVxZTkzdThvcGJ2NFNNSGhqWkxqWnFxZUhPalNHMyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1622781613),
+('xO8UiD9nmyuokljQy81w1a3ojcvdUovy3tLwSZh5', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.37', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMW12ak83eXVVVFhCenAzUzgzZTAxcWJmQ1d4TVVDVmJmbTFnVGdNMiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC90YXNrcyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRpamZMN092NVpITnB0MW9QQ0xqMlp1U2ZYSTJXOW8vUjRBSVBnWDhjRnVLLjRWR2Q1LlNNcSI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkaWpmTDdPdjVaSE5wdDFvUENMajJadVNmWEkyVzlvL1I0QUlQZ1g4Y0Z1Sy40VkdkNS5TTXEiO30=', 1622781581);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -175,10 +211,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'chuancito', 'juanpanchoguti@gmail.com', NULL, '$2y$10$1M5x7i/URoZqCOrgLquQkeHONIjJ3HNqHFxChJhGQJstKd8WgqafK', NULL, NULL, NULL, NULL, NULL, '2021-06-02 10:50:57', '2021-06-02 10:50:57'),
-(2, 'Mandir Huasco', 'mandirhuasco@gmail.com', NULL, '$2y$10$UvOjXT3y7EcMXFe3RyzJpOfcY50l4N4zA.Yr62la0.vT4K.uSmsPG', NULL, NULL, NULL, NULL, NULL, '2021-06-02 13:17:05', '2021-06-02 13:17:05'),
-(3, 'marko', 'markocortez@gmail.com', NULL, '$2y$10$ZNC99Mu7.KonvNhD2z4BRexh7.WBXCb9GItRN0Bkk1n0A13FbwV3S', NULL, NULL, NULL, NULL, NULL, '2021-06-02 15:26:51', '2021-06-02 15:26:51'),
-(4, 'karina', 'karina_45@gmail.com', NULL, '$2y$10$OWxO4OHOKR//eysTYw/pxe1q8mZZbPVG74GG9BeTSFhrEi95xVAOq', NULL, NULL, NULL, NULL, NULL, '2021-06-02 20:42:18', '2021-06-02 20:42:18');
+(1, 'Chuancito', 'juanpanchoguti@gmail.com', NULL, '$2y$10$ijfL7Ov5ZHNpt1oPCLj2ZuSfXI2W9o/R4AIPgX8cFuK.4VGd5.SMq', NULL, NULL, NULL, NULL, NULL, '2021-06-04 09:30:32', '2021-06-04 09:30:32');
 
 --
 -- Índices para tablas volcadas
@@ -188,6 +221,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tw
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `expedientes`
+--
+ALTER TABLE `expedientes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -224,12 +263,24 @@ ALTER TABLE `personas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `sessions_user_id_index` (`user_id`),
   ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indices de la tabla `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `users`
@@ -249,6 +300,12 @@ ALTER TABLE `clientes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `expedientes`
+--
+ALTER TABLE `expedientes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -258,7 +315,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -270,13 +327,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
