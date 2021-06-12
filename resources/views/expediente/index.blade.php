@@ -25,6 +25,7 @@
             <td>{{$expediente->cantidad}}</td>
             <td>{{$expediente->precio}}</td>
             <td>
+            <img src="{{asset('storage').'/'.$expediente->archivo }}" alt="">
             {{$expediente->archivo}}
             </td>
             <td>
@@ -39,4 +40,5 @@
         @endforeach
     </tbody>
 </table>
+
 @endsection

@@ -22,6 +22,9 @@
                     <x-jet-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Tareas') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Miembros') }}
+                    </x-jet-nav-link>
                 </div>
                 
             </div>
@@ -154,6 +157,9 @@
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Tareas') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                {{ __('Miembros') }}
             </x-jet-responsive-nav-link>
         </div>
         

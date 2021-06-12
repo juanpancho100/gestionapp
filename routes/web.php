@@ -32,3 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('tasks',\App\Http\Controllers\TaskController::class);
+Route::resource('roles',\App\Http\Controllers\RolesController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
