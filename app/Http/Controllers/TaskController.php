@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 
+
 class TaskController extends Controller
 {
     /**
@@ -72,7 +73,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTaskRequest $request,Task $task)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
         $task->update($request->validated());
 
@@ -85,7 +86,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
         $task->delete();
         return redirect()->route('tasks.index');

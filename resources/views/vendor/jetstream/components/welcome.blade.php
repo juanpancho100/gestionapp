@@ -10,7 +10,7 @@
     </div>
 
     <div class="mt-6 text-gray-500">
-       <center>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium nisi mollitia obcaecati, aut deleniti quisquam quae officia unde hic aliquid consequuntur modi placeat numquam suscipit quibusdam sapiente totam esse aperiam.</center>
+       <center>Bienvenido a SecFiles donde todo expediente es privado solo para nuestra empresa donde todo esta seguro y rapido a consultas.</center>
     </div>
 
 </div>
